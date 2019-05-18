@@ -18,9 +18,11 @@ public enum ResultCode {
     TOKEN_MISS(702);//token失效
 
     private final int code ;
-    ResultCode (int code){this.code = code ; }
+    ResultCode (int code){
+        this.code = code ;
+    }
+
     public int code (){
         return code ;
     }
-
 }

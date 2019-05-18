@@ -20,6 +20,14 @@
     <!-- 配置注解驱动 可以将request参数与绑定到controller参数上 -->
 
     <mvc:annotation-driven/>
+    <!--解决跨域问题-->
+    <mvc:cors>
+        <mvc:mapping path="/**"
+                     allowed-origins="*"
+                     allowed-methods="POST, GET, OPTIONS, DELETE, PUT"
+                     allowed-headers="Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
+                     allow-credentials="true" />
+    </mvc:cors>
 
     <!--静态资源映射-->
     <!--本项目把静态资源放在了webapp的static目录下，资源映射如下-->
@@ -63,12 +71,13 @@
     <!--</bean>-->
 
     <!--配置拦截器-->
-    <!--<mvc:interceptors>
-        &lt;!&ndash;使用Bean直接定义在<mvc:interceptor>下面的interceptor将拦截所有的请求&ndash;&gt;
-        &lt;!&ndash;<bean class="eendtech.interceptor.LoginInterceptor"/>&ndash;&gt;
+    <mvc:interceptors>
+        <!--使用Bean直接定义在<mvc:interceptor>下面的interceptor将拦截所有的请求-->
+        <!--<bean class="eendtech.Interceptor.TokenVerifingInterceptor"/>-->
         <mvc:interceptor>
-            <mvc:mapping path="/main"/>
-            <bean class="eendtech.interceptor.LoginInterceptor"/>
+            <mvc:mapping path="/api/**"/>
+            <mvc:exclude-mapping path="/api/erro/info"/>
+            <bean class="eendtech.Interceptor.TokenVerifingInterceptor"/>
         </mvc:interceptor>
-    </mvc:interceptors>-->
+    </mvc:interceptors>
 </beans>

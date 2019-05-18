@@ -11,5 +11,4 @@ import eendtech.po.User;
 public interface UserService {
     //通过帐号和密码来查询用户
     User findUser(String usercode , String password);
-
 }

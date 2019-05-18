@@ -1,6 +1,5 @@
 package eendtech.controller;
 
-import eendtech.po.Msg;
 import eendtech.po.User;
 import eendtech.service.UserService;
 import eendtech.utils.CheckResult;
@@ -10,11 +9,12 @@ import eendtech.utils.ResultCode;
 import eendtech.utils.ResultKit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @ author Seale
@@ -27,24 +27,6 @@ import java.util.Map;
 public class UserController {
     @Autowired
     private UserService userService;
-
-    @PostMapping(value = "/login")
-    @ResponseBody
-    public Msg login(@RequestBody User user){
-        Msg msg = new Msg();
-        User user_now = userService.findUser(user.getUser_code(),user.getUser_password());
-        if (user_now != null){
-            msg.setMsg("成功");
-            msg.setState_code("1");
-            Map<String , String > returns = new HashMap<>();
-            returns.put("des","这是一个成功的请求");
-            msg.setReturns(returns);
-        }else {
-            msg.setMsg("失败");
-            msg.setState_code("0");
-        }
-        return msg;
-    }
 
     @PostMapping(value = "/info")
     @ResponseBody
